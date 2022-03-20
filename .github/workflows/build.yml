@@ -27,6 +27,7 @@ jobs:
         path: modules/mosquitto.so
   
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - run: sudo apt-get install -y mosquitto
