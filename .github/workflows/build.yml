@@ -1,6 +1,6 @@
 name: Build Extension
 
-on:
+on: workflow_dispatch
   #push:
   #  branches: [ php8 ]
   pull_request:
