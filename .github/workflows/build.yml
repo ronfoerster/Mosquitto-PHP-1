@@ -36,7 +36,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: mosquitto.so
-        path: ./modules/mosquitto.so
+        path: ./modules
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
