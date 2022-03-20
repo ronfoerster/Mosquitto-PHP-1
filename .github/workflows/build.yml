@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: apt-get install -y libmosquitto-dev
+    - run: sudo apt-get install -y libmosquitto-dev
     - uses: actions/checkout@v2
     - name: Setup PHP-8.1
       uses: shivammathur/setup-php@v2
@@ -26,5 +26,10 @@ jobs:
       run: make
     - name: make check
       run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: install
+      run: make install
+    - name: upload extension
+      uses: actions/upload-artifact@v3
+      with:
+        name: mosquitto.so
+        path: modules/mosquitto.so
