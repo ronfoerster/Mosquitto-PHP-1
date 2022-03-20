@@ -15,15 +15,16 @@ jobs:
     - run: sudo apt-get install -y mosquitto
     - uses: actions/checkout@v2
     - name: Download a single artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: mosquitto.so
+      uses: actions/download-artifact@v3
+      with:
+        name: mosquitto.so
+        path: ./modules/mosquitto.so
     - name: Make Test-Certificates
-        run: ./tests/makeTestCerts.sh
-        shell: bash
+      run: ./tests/makeTestCerts.sh
+      shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d
     - name: Test extension        
-        run: php -n -c './tmp-php.ini' -d "extension_dir=./modules/" -d "extension=mosquitto.so" run-tests.php
+      run: php -n -c './tmp-php.ini' -d "extension_dir=./modules/" -d "extension=mosquitto.so" run-tests.php
         
 
     
