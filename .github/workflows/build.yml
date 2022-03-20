@@ -1,10 +1,6 @@
 name: Build Extension
 
 on: workflow_dispatch
-  #push:
-  #  branches: [ php8 ]
-  pull_request:
-    branches: [ php8 ]
 
 jobs:
   build:
