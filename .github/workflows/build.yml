@@ -37,9 +37,10 @@ jobs:
       with:
         name: mosquitto.so
         path: ./modules
+    - run: ls -al /home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/modules
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d
     - name: Test extension        
-      run: php -n -c './tmp-php.ini' -d "extension_dir=/home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/modules" -d "extension=mosquitto.so" run-tests.php
+      run: php -n -c './tmp-php.ini' -d "extension_dir=./modules" -d "extension=mosquitto.so" run-tests.php
