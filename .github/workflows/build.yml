@@ -25,7 +25,7 @@ jobs:
     - name: make
       run: make
     - name: install
-      run: make install
+      run: sudo make install
     - name: upload extension
       uses: actions/upload-artifact@v3
       with:
