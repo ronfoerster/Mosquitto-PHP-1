@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: apt-get install -y libmosquitto-dev
     - uses: actions/checkout@v2
     - name: Setup PHP-8.1
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
         tools: phpize
-    - name: phpize
-      run: phpize 
+    - run: phpize 
     - name: configure
       run: ./configure
     - name: make
