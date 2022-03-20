@@ -1,16 +1,14 @@
 name: Build Extension
 
 on:
-  push:
-    branches: [ php8 ]
+  #push:
+  #  branches: [ php8 ]
   pull_request:
     branches: [ php8 ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - run: sudo apt-get install -y libmosquitto-dev
     - uses: actions/checkout@v2
@@ -31,3 +29,20 @@ jobs:
       with:
         name: mosquitto.so
         path: modules/mosquitto.so
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: sudo apt-get install -y mosquitto
+    - uses: actions/checkout@v2
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: mosquitto.so
+        path: ./modules/mosquitto.so
+    - name: Make Test-Certificates
+      run: ./tests/makeTestCerts.sh
+      shell: bash
+    - run: mosquitto -c ./tests/mosquitto.conf -d
+    - name: Test extension        
+      run: php -n -c './tmp-php.ini' -d "extension_dir=./modules/" -d "extension=mosquitto.so" run-tests.php
