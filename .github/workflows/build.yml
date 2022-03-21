@@ -26,7 +26,7 @@ jobs:
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
-    - run: mosquitto -c ./tests/mosquitto.conf -d
+    - run: mosquitto -c ./tests/mosquitto.conf -d -v
     - name: Test extension        
-      run: php -m && make test
+      run: php ./tests/mtest.php
   
