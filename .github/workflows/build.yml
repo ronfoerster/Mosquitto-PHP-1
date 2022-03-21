@@ -29,5 +29,5 @@ jobs:
     - run: mosquitto -c ./tests/mosquitto.conf -d -v
     - name: Test extension        
       run: php ./tests/mtest.php
-    - run: export PHP_INI_SCAN_DIR=/etc/php/8.1/cli/conf.d && make test TESTS="tests/Message/__construct.phpt"
+    - run: echo $(INI_SCANNED_PATH) && echo $(PHP_TEST_SHARED_EXTENSIONS) && echo $(PHP_TEST_SETTINGS) && make test TESTS="tests/Message/__construct.phpt"
   
