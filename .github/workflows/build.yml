@@ -20,10 +20,13 @@ jobs:
       run: make
     - name: install
       run: sudo make install
+    - name: Config Extension
+      run: sudo bash ./tests/test.sh
+      shell: bash
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d
     - name: Test extension        
-      run: php run-tests.php -n -d "extension_dir=/home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/modules" -d "extension=mosquitto.so" 
+      run: php run-tests.php 
   
