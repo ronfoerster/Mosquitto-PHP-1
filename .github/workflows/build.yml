@@ -20,12 +20,11 @@ jobs:
       run: make
     - name: install
       run: sudo make install
-    - name: php.ini
-      run: php --ini
+    - run: echo -e "extension_dir=/usr/lib/php/20210902/\r\nextension=mosquitto.so" > /etc/php/8.1/cli/conf.d/15-mosquitto-php.ini
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d
     - name: Test extension        
-      run: php -n -c './tmp-php.ini' -d "extension_dir=./modules" -d "extension=mosquitto.so" run-tests.php
+      run: php -n -d "extension_dir=/home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/modules" -d "extension=mosquitto.so" run-tests.php
   
