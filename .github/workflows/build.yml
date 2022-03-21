@@ -29,4 +29,5 @@ jobs:
     - run: mosquitto -c ./tests/mosquitto.conf -d -v
     - name: Test extension        
       run: php ./tests/mtest.php
+    - run: make test TESTS="Message/__construct.phpt"
   
