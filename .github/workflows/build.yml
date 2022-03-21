@@ -28,5 +28,5 @@ jobs:
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d
     - name: Test extension        
-      run: php run-tests.php 
+      run: php -m && make test
   
