@@ -37,7 +37,7 @@ jobs:
       with:
         name: mosquitto.so
         path: ./modules
-    - run: ls -al /home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/modules
+    - run: chmod +x ./modules/mosquitto.so && ls -al /home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/modules
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
