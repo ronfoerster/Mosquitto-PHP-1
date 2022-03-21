@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - run: sudo apt-get install -y libmosquitto-dev
+    - run: sudo apt-get install -y mosquitto libmosquitto-dev
     - uses: actions/checkout@v2
     - name: Setup PHP-8.1
       uses: shivammathur/setup-php@v2
@@ -20,27 +20,12 @@ jobs:
       run: make
     - name: install
       run: sudo make install
-    - name: upload extension
-      uses: actions/upload-artifact@v3
-      with:
-        name: mosquitto.so
-        path: modules/mosquitto.so
-  
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - run: sudo apt-get install -y mosquitto
-    - uses: actions/checkout@v2
-    - name: Download a single artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: mosquitto.so
-        path: ./modules
-    - run: chmod +x ./modules/mosquitto.so && ls -al /home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/modules
+    - name: php.ini
+      run: php --ini
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d
     - name: Test extension        
       run: php -n -c './tmp-php.ini' -d "extension_dir=./modules" -d "extension=mosquitto.so" run-tests.php
+  
