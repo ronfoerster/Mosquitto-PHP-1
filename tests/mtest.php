@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 date_default_timezone_set('Europe/Berlin');
 
-echo "Hallo";
+var_dump(extension_loaded('mosquitto'));
 
 function mqtt_error_log($level, $message)
 {
