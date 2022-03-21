@@ -28,7 +28,7 @@ jobs:
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d -v
     - name: Test extension        
-      run: php ./tests/mtest.php
+      run: php -n -c './tmp-php.ini' -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/mtest.php
     - run: make test TESTS="tests/Message/__construct.phpt"
-    - run: cat /home/runner/work/Mosquitto-PHP-1/Mosquitto-PHP-1/tmp-php.ini ; echo $INI_SCANNED_PATH ; echo $PHP_TEST_SHARED_EXTENSIONS ; echo $PHP_TEST_SETTINGS
+    - run: echo $INI_SCANNED_PATH ; echo $PHP_TEST_SHARED_EXTENSIONS ; echo $PHP_TEST_SETTINGS
   
