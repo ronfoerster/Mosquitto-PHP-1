@@ -22,7 +22,7 @@ jobs:
       run: ./tests/makeTestCerts.sh
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d -v
-    - run: make test TESTS="tests/Message/__construct.phpt"
+    - run: make test
     - name: Test extension        
       run: php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/mtest.php
     - name: Config Extension
