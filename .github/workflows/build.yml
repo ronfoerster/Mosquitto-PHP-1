@@ -18,17 +18,17 @@ jobs:
       run: ./configure
     - name: make
       run: make
-    - name: install
-      run: sudo make install
-    - name: Config Extension
-      run: sudo bash ./tests/test.sh
-      shell: bash
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
     - run: mosquitto -c ./tests/mosquitto.conf -d -v
-    - name: Test extension        
-      run: php -n -c './tmp-php.ini' -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/mtest.php
     - run: make test TESTS="tests/Message/__construct.phpt"
-    - run: echo $INI_SCANNED_PATH ; echo $PHP_TEST_SHARED_EXTENSIONS ; echo $PHP_TEST_SETTINGS
+    - name: Test extension        
+      run: php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/mtest.php
+    - name: Config Extension
+      run: sudo bash ./tests/test.sh
+      shell: bash
+    - name: install
+      run: sudo make install
+    
   
