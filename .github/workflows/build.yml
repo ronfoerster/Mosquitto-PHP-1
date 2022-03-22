@@ -13,22 +13,12 @@ jobs:
       with:
         php-version: '8.1'
         tools: phpize
-    - run: phpize 
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
+    - run: phpize
+    - run: ./configure
+    - run: make
     - name: Make Test-Certificates
       run: ./tests/makeTestCerts.sh
       shell: bash
-    - run: mosquitto -c ./tests/mosquitto.conf -d -v
+    - name: Start Mosquitto
+      run: mosquitto -c ./tests/mosquitto.conf -d
     - run: make test
-    - name: Test extension        
-      run: php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/mtest.php
-    - name: Config Extension
-      run: sudo bash ./tests/test.sh
-      shell: bash
-    - name: install
-      run: sudo make install
-    
-  

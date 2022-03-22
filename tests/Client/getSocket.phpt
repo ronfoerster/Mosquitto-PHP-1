@@ -1,7 +1,7 @@
 --TEST--
 Mosquitto\Client::getSocket()
 --SKIPIF--
-if (!extension_loaded('mosquitto')) die('skip - Mosquitto extension not available');
+<?php if (!extension_loaded('mosquitto')) die('skip Mosquitto extension not available'); ?>
 --FILE--
 <?php
 use Mosquitto\Client;
