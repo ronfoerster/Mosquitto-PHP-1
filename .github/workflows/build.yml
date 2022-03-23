@@ -20,6 +20,6 @@ jobs:
       run: cd tests && ./makeTestCerts.sh && sudo chown -R mosquitto:mosquitto certs
       shell: bash
     - name: Start Mosquitto
-      run: mosquitto -c mosquitto.conf -d
-    - run: make test
+      run: pwd && cd tests && mosquitto -c mosquitto.conf -d
+    - run: pwd && make test
     - run: cd ~ && pwd
