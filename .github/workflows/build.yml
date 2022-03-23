@@ -16,10 +16,7 @@ jobs:
     - run: phpize
     - run: ./configure
     - run: make
-    - name: Make Test-Certificates
-      run: cd tests && ./makeTestCerts.sh && sudo chown -R mosquitto:mosquitto certs
+    - name: Make Tests
+      run: cd tests && ./run-tests.sh
       shell: bash
-    - name: Start Mosquitto
-      run: pwd && cd tests && mosquitto -c mosquitto.conf -d
-    - run: pwd && make test
     - run: cd ~ && pwd
