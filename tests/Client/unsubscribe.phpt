@@ -10,8 +10,8 @@ include(dirname(__DIR__) . '/setup.php');
 try {
     $client = new Mosquitto\Client;
     $client->unsubscribe();
-} catch (Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 /* Null param */
@@ -19,7 +19,7 @@ try {
     $client = new Mosquitto\Client;
     $client->unsubscribe(null);
 } catch (Exception $e) {
-    writeException($e);
+    echo $e->getMessage(), "\n";
 }
 
 /* One param */
@@ -27,15 +27,15 @@ try {
     $client = new Mosquitto\Client;
     $client->unsubscribe('#');
 } catch (Exception $e) {
-    writeException($e);
+    echo $e->getMessage(), "\n";
 }
 
 /* Daft params */
 try {
     $client = new Mosquitto\Client;
     $client->unsubscribe(new stdClass);
-} catch (Exception $e) {
-    writeException($e);
+} catch (TypeError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 $client = new Mosquitto\Client;
@@ -57,10 +57,12 @@ $client->connect(TEST_MQTT_HOST);
 $client->loopForever();
 ?>
 --EXPECTF--
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::unsubscribe() expects exactly 1 parameter, 0 given
-Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
-Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::unsubscribe() expects parameter 1 to be string, object given
+Mosquitto\Client::unsubscribe() expects exactly 1 argument, 0 given
+
+Deprecated: Mosquitto\Client::unsubscribe(): Passing null to parameter #1 ($topic) of type string is deprecated %s
+The client is not currently connected.
+The client is not currently connected.
+Mosquitto\Client::unsubscribe(): Argument #1 ($topic) must be of type string, stdClass given
 array(1) {
   [0]=>
   int(2)

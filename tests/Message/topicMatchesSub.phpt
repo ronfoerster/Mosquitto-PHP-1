@@ -16,22 +16,26 @@ var_dump(Message::topicMatchesSub('foo', ''));
 
 try {
     var_dump(Message::topicMatchesSub(new stdClass, "#"));
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 
 try {
     var_dump(Message::topicMatchesSub("foo", new stdClass));
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 ?>
 --EXPECTF--
 bool(true)
 bool(true)
+
+Deprecated: Mosquitto\Message::topicMatchesSub(): Passing null to parameter #1 ($topic) of type string is deprecated %s
+
+Deprecated: Mosquitto\Message::topicMatchesSub(): Passing null to parameter #2 ($subscription) of type string is deprecated %s
 bool(false)
 bool(false)
 bool(false)
 bool(false)
-string(83) "Mosquitto\Message::topicMatchesSub() expects parameter 1 to be string, object given"
-string(83) "Mosquitto\Message::topicMatchesSub() expects parameter 2 to be string, object given"
+string(%d) "Mosquitto\Message::topicMatchesSub(): Argument #1 ($topic) must be of type string, %s given"
+string(%d) "Mosquitto\Message::topicMatchesSub(): Argument #2 ($subscription) must be of type string, %s given"

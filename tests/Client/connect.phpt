@@ -10,7 +10,7 @@ include(dirname(__DIR__) . '/setup.php');
 try {
     $client = new Mosquitto\Client();
     $client->connect();
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -18,7 +18,7 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(false);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -26,7 +26,7 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(":^(%^*:");
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -34,7 +34,7 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, 0);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -42,7 +42,7 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, new stdClass);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -51,7 +51,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, new stdClass);
     var_dump($client);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -60,7 +60,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '^(%%^&*');
     var_dump($client);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -69,7 +69,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0);
     var_dump($client);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -78,7 +78,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 10);
     var_dump($client);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -87,7 +87,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '127.0.0.1');
     var_dump($client);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -96,18 +96,17 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST);
     var_dump($client);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     echo $e->getMessage(), "\n";
 }
 
 ?>
 --EXPECTF--
-Mosquitto\Client::connect() expects at least 1 parameter, 0 given
+Mosquitto\Client::connect() expects at least 1 argument, 0 given
 %s error.
 %s error.
-Invalid function arguments provided.
-Mosquitto\Client::connect() expects parameter 2 to be %s, object given
-Mosquitto\Client::connect() expects parameter 3 to be %s, object given
+Mosquitto\Client::connect(): Argument #%d ($%s) must be of type int, stdClass given
+Mosquitto\Client::connect(): Argument #%d ($%s) must be of type int, stdClass given
 %s error.
 object(Mosquitto\Client)#%d (%d) {
 }

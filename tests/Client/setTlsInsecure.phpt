@@ -16,7 +16,7 @@ var_dump($client);
 try {
 $client->setTlsInsecure(new stdClass);
 var_dump($client);
-} catch (Mosquitto\Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 
@@ -26,4 +26,4 @@ object(Mosquitto\Client)#%d (0) {
 }
 object(Mosquitto\Client)#%d (0) {
 }
-string(82) "Mosquitto\Client::setTlsInsecure() expects parameter 1 to be boolean, object given"
+string(%d) "Mosquitto\Client::setTlsInsecure(): Argument #1 (%s) must be of type bool, stdClass given"

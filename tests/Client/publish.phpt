@@ -11,79 +11,79 @@ $client = new Mosquitto\Client();
 try {
     $client->publish();
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish(new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish(new stdClass, new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('#');
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic');
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1, new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1, true);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1, false);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 
 try {
     $client->publish('topic', 'payload');
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 $client2 = new Mosquitto\Client();
@@ -109,17 +109,17 @@ for ($i = 0; $i < 10; $i++) {
 
 ?>
 --EXPECTF--
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects at least 2 parameters, 0 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects at least 2 parameters, 1 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects parameter 1 to be string, object given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects at least 2 parameters, 1 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects at least 2 parameters, 1 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects parameter 3 to be %s, object given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects parameter 4 to be boolean, object given
-Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
-Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
-Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
-Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
+Mosquitto\Client::publish() expects at least 2 arguments, 0 given
+Mosquitto\Client::publish() expects at least 2 arguments, 1 given
+Mosquitto\Client::publish(): Argument #1 ($topic) must be of type string, stdClass given
+Mosquitto\Client::publish() expects at least 2 arguments, 1 given
+Mosquitto\Client::publish() expects at least 2 arguments, 1 given
+Mosquitto\Client::publish(): Argument #3 ($qos) must be of type int, stdClass given
+Mosquitto\Client::publish(): Argument #4 ($retain) must be of type bool, stdClass given
+The client is not currently connected.
+The client is not currently connected.
+The client is not currently connected.
+The client is not currently connected.
 object(Mosquitto\Message)#%d (5) {
   ["mid"]=>
   int(%d)

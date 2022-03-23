@@ -11,10 +11,10 @@ $client->clearWill();
 
 try {
     $client->clearWill(true);
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (Throwable $e) {
+    echo $e->getMessage(), "\n";
 }
 
 ?>
 --EXPECTF--
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::clearWill() expects exactly 0 parameters, 1 given
+Mosquitto\Client::clearWill() expects exactly 0 arguments, 1 given

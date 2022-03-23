@@ -19,14 +19,14 @@ var_dump($client);
 try {
     $client->setMaxInFlightMessages("foo");
     var_dump($client);
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 
 try {
     $client->setMaxInFlightMessages(new stdClass);
     var_dump($client);
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 ?>
@@ -37,5 +37,5 @@ object(Mosquitto\Client)#%d (0) {
 }
 object(Mosquitto\Client)#%d (0) {
 }
-string(%d) "Mosquitto\Client::setMaxInFlightMessages() expects parameter 1 to be %s, string given"
-string(%d) "Mosquitto\Client::setMaxInFlightMessages() expects parameter 1 to be %s, object given"
+string(%d) "Mosquitto\Client::setMaxInFlightMessages(): Argument #%d ($max) must be of type int, string given"
+string(%d) "Mosquitto\Client::setMaxInFlightMessages(): Argument #%d ($max) must be of type int, stdClass given"

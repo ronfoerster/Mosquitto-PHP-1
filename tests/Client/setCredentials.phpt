@@ -23,26 +23,34 @@ var_dump($client);
 try {
     $client->setCredentials(new stdClass, 'foo');
     var_dump($client);
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 
 try {
     $client->setCredentials('foo', new stdClass);
     var_dump($client);
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
-
 ?>
 --EXPECTF--
 object(Mosquitto\Client)#%d (0) {
 }
+
+Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
+
+Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
 object(Mosquitto\Client)#%d (0) {
 }
+
+Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
 object(Mosquitto\Client)#%d (0) {
 }
+
+Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
 object(Mosquitto\Client)#%d (0) {
 }
-string(81) "Mosquitto\Client::setCredentials() expects parameter 1 to be string, object given"
-string(81) "Mosquitto\Client::setCredentials() expects parameter 2 to be string, object given"
+string(98) "Mosquitto\Client::setCredentials(): Argument #1 ($username) must be of type string, stdClass given"
+string(98) "Mosquitto\Client::setCredentials(): Argument #2 ($password) must be of type string, stdClass given"
+

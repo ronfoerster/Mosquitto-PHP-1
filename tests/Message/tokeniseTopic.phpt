@@ -15,7 +15,7 @@ var_dump(Message::tokeniseTopic(NULL));
 
 try {
     var_dump(Message::tokeniseTopic(new stdClass));
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 ?>
@@ -46,8 +46,10 @@ array(3) {
   [2]=>
   string(3) "bar"
 }
+
+Deprecated: Mosquitto\Message::tokeniseTopic(): Passing null to parameter #1 ($topic) of type string is deprecated %s
 array(1) {
   [0]=>
   NULL
 }
-string(%d) "%s expects parameter 1 to be string, object given"
+string(%d) "%s: Argument #1 ($topic) must be of type string, stdClass given"

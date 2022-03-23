@@ -11,90 +11,90 @@ $client = new Mosquitto\Client();
 try {
     $client->setWill();
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill(new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill(new stdClass, new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('#');
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('topic');
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('topic', 'payload');
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('topic', 'payload', new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('topic', 'payload', 1);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('topic', 'payload', 1, new stdClass);
     echo "Done\n";
-} catch (Mosquitto\Exception $e) {
-    writeException($e);
+} catch (TypeError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('topic', 'payload', 1, false);
     echo "Done\n";
 } catch (Mosquitto\Exception $e) {
-    writeException($e);
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setWill('topic', 'payload', 1, true);
     echo "Done\n";
 } catch (Mosquitto\Exception $e) {
-    writeException($e);
+    echo $e->getMessage(), "\n";
 }
 
 ?>
 --EXPECTF--
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 0 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 1 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 2 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 1 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 1 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 2 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 3 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 3 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects parameter 4 to be boolean, object given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 0 given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 1 given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 2 given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 1 given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 1 given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 2 given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 3 given
+Mosquitto\Client::setWill() expects exactly 4 arguments, 3 given
+Mosquitto\Client::setWill(): Argument #4 ($retain) must be of type bool, %s given
 Done
 Done

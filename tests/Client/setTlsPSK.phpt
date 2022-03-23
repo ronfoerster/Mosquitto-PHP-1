@@ -10,27 +10,27 @@ $client = new Mosquitto\Client;
 
 try {
     $client->setTlsPSK();
-} catch (Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setTlsPsk('1234567890abcdef');
-} catch (Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setTlsPsk("This is invalid hex", "Username");
-} catch (Exception $e) {
-    writeException($e);
+} catch (\Mosquitto\Exception $e) {
+    echo $e->getMessage(), "\n";
 }
 
 /* This actually doesn't fail */
 try {
     $client->setTlsPsk('1234567890abcdef', 'username', "This is not a cipher string");
 } catch (Exception $e) {
-    writeException($e);
+    echo $e->getMessage(), "\n";
 }
 
 $client->setTlsPsk('1234567890abcdef', 'testuser');
@@ -49,9 +49,9 @@ $client->loopForever();
 
 ?>
 --EXPECTF--
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setTlsPSK() expects at least 2 parameters, 0 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setTlsPSK() expects at least 2 parameters, 1 given
-Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
+Mosquitto\Client::setTlsPSK() expects at least 2 arguments, 0 given
+Mosquitto\Client::setTlsPSK() expects at least 2 arguments, 1 given
+Invalid function arguments provided.
 object(Mosquitto\Client)#%d (0) {
 }
 object(Mosquitto\Client)#%d (0) {

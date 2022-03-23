@@ -9,26 +9,26 @@ $client = new Mosquitto\Client;
 
 try {
     $client->setTlsOptions();
-} catch (Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setTlsOptions(new stdClass);
-} catch (Exception $e) {
-    writeException($e);
+} catch (TypeError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setTlsOptions(Mosquitto\Client::SSL_VERIFY_PEER, new stdClass);
-} catch (Exception $e) {
-    writeException($e);
+} catch (TypeError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setTlsOptions(Mosquitto\Client::SSL_VERIFY_PEER, 'tlsv1.2', new stdClass);
-} catch (Exception $e) {
-    writeException($e);
+} catch (TypeError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 $client->setTlsOptions(Mosquitto\Client::SSL_VERIFY_PEER);
@@ -37,8 +37,9 @@ $client->setTlsOptions(Mosquitto\Client::SSL_VERIFY_PEER, 'tlsv1.2', 'DEFAULT');
 
 ?>
 --EXPECTF--
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setTlsOptions() expects at least 1 parameter, 0 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setTlsOptions() expects parameter 1 to be %s, object given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setTlsOptions() expects parameter 2 to be string, object given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setTlsOptions() expects parameter 3 to be string, object given
+Mosquitto\Client::setTlsOptions() expects at least 1 argument, 0 given
+Mosquitto\Client::setTlsOptions(): Argument #%d ($verify_peer) must be of type int, stdClass given
+Mosquitto\Client::setTlsOptions(): Argument #%d ($tls_version) must be of type %s, stdClass given
+Mosquitto\Client::setTlsOptions(): Argument #%d ($ciphers) must be of type %s, stdClass given
+
 

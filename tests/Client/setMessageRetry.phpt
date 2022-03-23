@@ -19,14 +19,14 @@ var_dump($client);
 try {
     $client->setMessageRetry("foo");
     var_dump($client);
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 
 try {
     $client->setMessageRetry(new stdClass);
     var_dump($client);
-} catch (Exception $e) {
+} catch (TypeError $e) {
     var_dump($e->getMessage());
 }
 ?>
@@ -37,5 +37,6 @@ object(Mosquitto\Client)#%d (0) {
 }
 object(Mosquitto\Client)#%d (0) {
 }
-string(%d) "Mosquitto\Client::setMessageRetry() expects parameter 1 to be %s, string given"
-string(%d) "Mosquitto\Client::setMessageRetry() expects parameter 1 to be %s, object given"
+string(%d) "Mosquitto\Client::setMessageRetry(): Argument #%d ($messageRetry) must be of type int, string given"
+string(%d) "Mosquitto\Client::setMessageRetry(): Argument #%d ($messageRetry) must be of type int, stdClass given"
+

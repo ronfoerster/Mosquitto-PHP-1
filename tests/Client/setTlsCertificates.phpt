@@ -9,42 +9,41 @@ $client = new Mosquitto\Client;
 
 try {
     $client->setTlsCertificates();
-} catch (Exception $e) {
-    writeException($e);
+} catch (TypeError $e) {
+    echo $e->getMessage(), "\n";
 }
 
 try {
     $client->setTlsCertificates('/does/not/exist');
-} catch (Exception $e) {
+} catch (Throwable $e) {
     writeException($e);
 }
 
 try {
     $client->setTlsCertificates(CERTIFICATE_DIR . 'ca.crt', '/does/not/exist');
-} catch (Exception $e) {
+} catch (Throwable $e) {
     writeException($e);
 }
 
 try {
     $client->setTlsCertificates(CERTIFICATE_DIR . 'ca.crt', __FILE__);
-} catch (Exception $e) {
+} catch (Throwable $e) {
     writeException($e);
 }
 
 try {
     $client->setTlsCertificates(CERTIFICATE_DIR . 'ca.crt', CERTIFICATE_DIR . 'client.crt');
-} catch (Exception $e) {
+} catch (Throwable $e) {
     writeException($e);
 }
 
 try {
     $client->setTlsCertificates(CERTIFICATE_DIR . 'ca.crt', CERTIFICATE_DIR . 'client.crt', CERTIFICATE_DIR . 'client.key');
-} catch (Exception $e) {
+} catch (Throwable $e) {
     writeException($e);
 }
 
 $client->setTlsCertificates(CERTIFICATE_DIR . 'ca.crt');
-//$client->setTlsCertificates(CERTIFICATE_DIR . 'ca.crt', CERTIFICATE_DIR . 'client.crt', CERTIFICATE_DIR . 'client-enc.key', 'Mosquitto-PHP');
 
 $client->onConnect(function() use ($client) {
     echo "Connected successfully\n";
@@ -68,7 +67,7 @@ $client2->loopForever();
 
 ?>
 --EXPECTF--
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setTlsCertificates() expects at least 1 parameter, 0 given
+Mosquitto\Client::setTlsCertificates() expects at least 1 argument, 0 given
 Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
 Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
 Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
