@@ -17,7 +17,7 @@ jobs:
     - run: ./configure
     - run: make
     - name: Make Test-Certificates
-      run: cd tests && ./makeTestCerts.sh && chown -R mosquitto:mosquitto certs
+      run: cd tests && ./makeTestCerts.sh && sudo chown -R mosquitto:mosquitto certs
       shell: bash
     - name: Start Mosquitto
       run: mosquitto -c mosquitto.conf -d
