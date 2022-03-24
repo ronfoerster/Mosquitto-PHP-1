@@ -1,11 +1,9 @@
 #!/bin/bash -e
 #sudo chmod +x "${ENV_SCRIPT}"
 
-echo "GITHUB_ACTION_PATH: ${GITHUB_ACTION_PATH}"
 cd tests
-pwd
 ./makeTestCerts.sh
 sudo chown -R mosquitto:mosquitto certs
-mosquitto -c mosquitto.conf -d
+mosquitto -c "${GITHUB_ACTION_PATH}/tests/mosquitto.conf" -d
 cd ..
-make test
+#make test
