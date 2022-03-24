@@ -11,7 +11,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect();
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Invalid hostname */
@@ -19,7 +19,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(false);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Invalid hostname */
@@ -27,7 +27,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(":^(%^*:");
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Invalid port */
@@ -35,7 +35,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, 0);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Invalid port */
@@ -43,7 +43,7 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, new stdClass);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Invalid keepalive */
@@ -52,7 +52,7 @@ try {
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, new stdClass);
     var_dump($client);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Invalid bind address */
@@ -61,7 +61,7 @@ try {
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '^(%%^&*');
     var_dump($client);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Zero keepalive (OK) */
@@ -70,7 +70,7 @@ try {
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0);
     var_dump($client);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* 10-second keepalive */
@@ -79,7 +79,7 @@ try {
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 10);
     var_dump($client);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Bind to 127.0.0.1 - should work if connecting to localhost */
@@ -88,7 +88,7 @@ try {
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '127.0.0.1');
     var_dump($client);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 /* Specify just the host */
@@ -97,7 +97,7 @@ try {
     $client->connect(TEST_MQTT_HOST);
     var_dump($client);
 } catch (Throwable $e) {
-    echo $e->getMessage(), "\n";
+    writeException($e);
 }
 
 ?>
