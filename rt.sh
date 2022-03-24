@@ -4,6 +4,6 @@
 cd tests
 ./makeTestCerts.sh
 sudo chown -R mosquitto:mosquitto certs
-mosquitto -c mosquitto.conf -d
+mosquitto -c mosquitto.conf
 cd ..
 #make test
