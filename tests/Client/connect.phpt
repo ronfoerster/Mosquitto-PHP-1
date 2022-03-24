@@ -10,9 +10,13 @@ include(dirname(__DIR__) . '/setup.php');
 try {
     $client = new Mosquitto\Client();
     $client->connect();
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 }
+} catch (Error $e) {
+    printf("Caught error\n");
+}
+
 
 /* Invalid hostname */
 try {
@@ -21,6 +25,10 @@ try {
 } catch (Throwable $e) {
     writeException($e);
 }
+} catch (Error $e) {
+    printf("Caught error\n");
+}
+
 
 /* Invalid hostname */
 try {
@@ -29,6 +37,10 @@ try {
 } catch (Throwable $e) {
     writeException($e);
 }
+} catch (Error $e) {
+    printf("Caught error\n");
+}
+
 
 /* Invalid port */
 try {
@@ -37,6 +49,10 @@ try {
 } catch (Throwable $e) {
     writeException($e);
 }
+} catch (Error $e) {
+    printf("Caught error\n");
+}
+
 
 /* Invalid port */
 try {
