@@ -17,6 +17,9 @@ jobs:
     - run: ./configure
     - run: make
     - name: Make Tests
-      run: cd tests && ./run-tests.sh
+      run: |
+        pwd
+        ./run-tests.sh
       shell: bash
+      working-directory: ./tests
     - run: cd ~ && pwd
