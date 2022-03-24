@@ -4,9 +4,7 @@
 cd tests
 sudo systemctl stop mosquitto
 ./makeTestCerts.sh
-sudo chown -R mosquitto:mosquitto certs
-echo "$GITHUB_ACTION_PATH"
-id
+sudo chown -R runner:runner certs
 ls -al certs
 mosquitto -c mosquitto.conf
 cd ..

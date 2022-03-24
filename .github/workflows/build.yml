@@ -18,5 +18,6 @@ jobs:
     - run: make
     - name: Make Tests
       run: |
+        echo "${GITHUB_ACTION_PATH}"
         ./rt.sh
       shell: bash
