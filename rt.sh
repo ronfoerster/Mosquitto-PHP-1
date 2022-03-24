@@ -5,7 +5,7 @@ cd tests
 sudo systemctl stop mosquitto
 ./makeTestCerts.sh
 sudo chown -R runner:runner certs
-ls -al certs
 mosquitto -c mosquitto.conf -d
 cd ..
-make test
+php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/connect.phpt
+#make test TESTS="tests/Client/connect.phpt"
