@@ -12,7 +12,6 @@ try {
     $client->connect();
 } catch (Exception $e) {
     writeException($e);
-}
 } catch (Error $e) {
     printf("Caught error\n");
 }
@@ -24,7 +23,6 @@ try {
     $client->connect(false);
 } catch (Throwable $e) {
     writeException($e);
-}
 } catch (Error $e) {
     printf("Caught error\n");
 }
@@ -36,7 +34,6 @@ try {
     $client->connect(":^(%^*:");
 } catch (Throwable $e) {
     writeException($e);
-}
 } catch (Error $e) {
     printf("Caught error\n");
 }
@@ -48,7 +45,6 @@ try {
     $client->connect(TEST_MQTT_HOST, 0);
 } catch (Throwable $e) {
     writeException($e);
-}
 } catch (Error $e) {
     printf("Caught error\n");
 }
