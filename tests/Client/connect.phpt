@@ -56,6 +56,9 @@ try {
     $client->connect(TEST_MQTT_HOST, new stdClass);
 } catch (Throwable $e) {
     writeException($e);
+} catch (Error $e) {
+    printf("Caught error\n");
+    var_dump($e);
 }
 
 /* Invalid keepalive */
@@ -65,6 +68,9 @@ try {
     var_dump($client);
 } catch (Throwable $e) {
     writeException($e);
+} catch (Error $e) {
+    printf("Caught error\n");
+    var_dump($e);
 }
 
 /* Invalid bind address */
@@ -74,6 +80,9 @@ try {
     var_dump($client);
 } catch (Throwable $e) {
     writeException($e);
+} catch (Error $e) {
+    printf("Caught error\n");
+    var_dump($e);
 }
 
 /* Zero keepalive (OK) */
@@ -83,6 +92,9 @@ try {
     var_dump($client);
 } catch (Throwable $e) {
     writeException($e);
+} catch (Error $e) {
+    printf("Caught error\n");
+    var_dump($e);
 }
 
 /* 10-second keepalive */
@@ -92,6 +104,9 @@ try {
     var_dump($client);
 } catch (Throwable $e) {
     writeException($e);
+} catch (Error $e) {
+    printf("Caught error\n");
+    var_dump($e);
 }
 
 /* Bind to 127.0.0.1 - should work if connecting to localhost */
@@ -101,6 +116,9 @@ try {
     var_dump($client);
 } catch (Throwable $e) {
     writeException($e);
+} catch (Error $e) {
+    printf("Caught error\n");
+    var_dump($e);
 }
 
 /* Specify just the host */
@@ -110,6 +128,9 @@ try {
     var_dump($client);
 } catch (Throwable $e) {
     writeException($e);
+} catch (Error $e) {
+    printf("Caught error\n");
+    var_dump($e);
 }
 
 ?>
