@@ -1,7 +1,7 @@
-#!/bin/sh
-set -e
+#!/bin/bash -e
+sudo chmod +x "${ENV_SCRIPT}"
 
-echo "Tests"
+echo "GITHUB_ACTION_PATH: ${GITHUB_ACTION_PATH}"
 pwd
 ./makeTestCerts.sh
 sudo chown -R mosquitto:mosquitto certs
