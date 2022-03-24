@@ -20,4 +20,3 @@ jobs:
       run: |
         ./rt.sh
       shell: bash
-    - run: cd ~ && pwd
