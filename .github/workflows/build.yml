@@ -17,7 +17,5 @@ jobs:
     - run: ./configure
     - run: make
     - name: Make Tests
-      run: |
-        echo "${GITHUB_ACTION_PATH}"
-        ./rt.sh
+      run: ./rt.sh
       shell: bash
