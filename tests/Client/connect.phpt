@@ -6,7 +6,7 @@ Mosquitto\Client::connect()
 <?php
 include(dirname(__DIR__) . '/setup.php');
 
-/* No parameters */
+/* 1 No parameters */
 try {
     $client = new Mosquitto\Client();
     $client->connect();
@@ -17,7 +17,7 @@ try {
 }
 
 
-/* Invalid hostname */
+/* 2 Invalid hostname */
 try {
     $client = new Mosquitto\Client();
     $client->connect(false);
@@ -28,7 +28,7 @@ try {
 }
 
 
-/* Invalid hostname */
+/* 3 Invalid hostname */
 try {
     $client = new Mosquitto\Client();
     $client->connect(":^(%^*:");
@@ -39,7 +39,8 @@ try {
 }
 
 
-/* Invalid port */
+/* 4 Invalid port */
+/*
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, 0);
@@ -48,9 +49,9 @@ try {
 } catch (Error $e) {
     echo $e->getMessage() . PHP_EOL;
 }
+*/
 
-
-/* Invalid port */
+/* 5 Invalid port */
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, new stdClass);
@@ -62,7 +63,7 @@ try {
     echo $e->getMessage() . PHP_EOL;
 }
 
-/* Invalid keepalive */
+/* 6 Invalid keepalive */
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, new stdClass);
@@ -75,7 +76,8 @@ try {
     echo $e->getMessage() . PHP_EOL;
 }
 
-/* Invalid bind address */
+/* 7 Invalid bind address */
+/*
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '^(%%^&*');
@@ -85,8 +87,10 @@ try {
 } catch (Error $e) {
     echo $e->getMessage() . PHP_EOL;
 }
+*/
 
-/* Zero keepalive (OK) */
+/* 8 Zero keepalive (OK) */
+/*
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0);
@@ -96,8 +100,9 @@ try {
 } catch (Error $e) {
     echo $e->getMessage() . PHP_EOL;
 }
+*/
 
-/* 10-second keepalive */
+/* 9  10-second keepalive */
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 10);
@@ -108,7 +113,8 @@ try {
     echo $e->getMessage() . PHP_EOL;
 }
 
-/* Bind to 127.0.0.1 - should work if connecting to localhost */
+/* 10 Bind to 127.0.0.1 - should work if connecting to localhost */
+/*
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '127.0.0.1');
@@ -118,8 +124,9 @@ try {
 } catch (Error $e) {
     echo $e->getMessage() . PHP_EOL;
 }
+*/
 
-/* Specify just the host */
+/* 11 Specify just the host */
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST);
@@ -133,17 +140,11 @@ try {
 ?>
 --EXPECTF--
 Mosquitto\Client::connect() expects at least 1 argument, 0 given
-%s error.
-%s error.
-Mosquitto\Client::connect(): Argument #%d ($%s) must be of type int, stdClass given
-Mosquitto\Client::connect(): Argument #%d ($%s) must be of type int, stdClass given
-%s error.
-object(Mosquitto\Client)#%d (%d) {
+Caught Mosquitto\Exception with code 0 and message: Lookup error.
+Caught Mosquitto\Exception with code 0 and message: Lookup error.
+Mosquitto\Client::connect(): Argument #2 ($port) must be of type int, stdClass given
+Mosquitto\Client::connect(): Argument #3 ($keepalive) must be of type int, stdClass given
+object(Mosquitto\Client)#%d (0) {
 }
-object(Mosquitto\Client)#%d (%d) {
+object(Mosquitto\Client)#%d (0) {
 }
-object(Mosquitto\Client)#%d (%d) {
-}
-object(Mosquitto\Client)#%d (%d) {
-}
-
