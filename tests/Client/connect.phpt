@@ -10,10 +10,10 @@ include(dirname(__DIR__) . '/setup.php');
 try {
     $client = new Mosquitto\Client();
     $client->connect();
-} catch (Exception $e) {
-    writeException($e);
+} catch (ArgumentCountError $e) {
+    echo $e->getMessage() . PHP_EOL;
 } catch (Error $e) {
-    printf("Caught error\n");
+    echo $e->getMessage() . PHP_EOL;
 }
 
 
@@ -21,10 +21,10 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(false);
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
+    echo $e->getMessage() . PHP_EOL;
 }
 
 
@@ -32,10 +32,10 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(":^(%^*:");
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
+    echo $e->getMessage() . PHP_EOL;
 }
 
 
@@ -43,10 +43,10 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, 0);
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
+    echo $e->getMessage() . PHP_EOL;
 }
 
 
@@ -54,11 +54,12 @@ try {
 try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, new stdClass);
-} catch (Throwable $e) {
+} catch (TypeError $e) {
+    echo $e->getMessage() . PHP_EOL;
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
-    var_dump($e);
+    echo $e->getMessage() . PHP_EOL;
 }
 
 /* Invalid keepalive */
@@ -66,11 +67,12 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, new stdClass);
     var_dump($client);
-} catch (Throwable $e) {
+} catch (TypeError $e) {
+    echo $e->getMessage() . PHP_EOL;
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
-    var_dump($e);
+    echo $e->getMessage() . PHP_EOL;
 }
 
 /* Invalid bind address */
@@ -78,11 +80,10 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '^(%%^&*');
     var_dump($client);
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
-    var_dump($e);
+    echo $e->getMessage() . PHP_EOL;
 }
 
 /* Zero keepalive (OK) */
@@ -90,11 +91,10 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0);
     var_dump($client);
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
-    var_dump($e);
+    echo $e->getMessage() . PHP_EOL;
 }
 
 /* 10-second keepalive */
@@ -102,11 +102,10 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 10);
     var_dump($client);
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
-    var_dump($e);
+    echo $e->getMessage() . PHP_EOL;
 }
 
 /* Bind to 127.0.0.1 - should work if connecting to localhost */
@@ -114,11 +113,10 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST, TEST_MQTT_PORT, 0, '127.0.0.1');
     var_dump($client);
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
-    var_dump($e);
+    echo $e->getMessage() . PHP_EOL;
 }
 
 /* Specify just the host */
@@ -126,11 +124,10 @@ try {
     $client = new Mosquitto\Client();
     $client->connect(TEST_MQTT_HOST);
     var_dump($client);
-} catch (Throwable $e) {
+} catch (Exception $e) {
     writeException($e);
 } catch (Error $e) {
-    printf("Caught error\n");
-    var_dump($e);
+    echo $e->getMessage() . PHP_EOL;
 }
 
 ?>
