@@ -1,0 +1,29 @@
+name: Build and Test Extension
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - run: sudo apt-get install -y mosquitto libmosquitto-dev
+    - uses: actions/checkout@v2
+    - name: Setup PHP-8.1
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        tools: phpize
+    - name: Build extension
+      run: |
+        phpize
+        ./configure
+        make
+    - name: Run tests
+      run: |
+        sudo systemctl stop mosquitto
+        cd tests
+        ./makeTestCerts.sh
+        sudo chown -R runner:runner certs
+        mosquitto -c mosquitto.conf -d
+        cd ..
+        make test

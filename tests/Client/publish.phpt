@@ -116,9 +116,9 @@ Mosquitto\Client::publish() expects at least 2 arguments, 1 given
 Mosquitto\Client::publish() expects at least 2 arguments, 1 given
 Mosquitto\Client::publish(): Argument #3 ($qos) must be of type int, stdClass given
 Mosquitto\Client::publish(): Argument #4 ($retain) must be of type bool, stdClass given
-The client is not currently connected.
-The client is not currently connected.
-The client is not currently connected.
+Done.
+Done.
+Done.
 The client is not currently connected.
 object(Mosquitto\Message)#%d (5) {
   ["mid"]=>

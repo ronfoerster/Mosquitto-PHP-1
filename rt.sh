@@ -7,8 +7,8 @@ sudo systemctl stop mosquitto
 sudo chown -R runner:runner certs
 mosquitto -c mosquitto.conf -d
 cd ..
-make test TESTS="tests/Client/connect.phpt"
-php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/publish.phpt
-php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setTlsCertificates.phpt
-php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setTlsPSK.phpt
-
+#make test TESTS="tests/Client/connect.phpt"
+#php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/publish.phpt
+#php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setTlsCertificates.phpt
+#php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setTlsPSK.phpt
+make test
