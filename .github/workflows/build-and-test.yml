@@ -20,6 +20,8 @@ jobs:
         make
     - name: Run tests
       run: |
+        export NO_INTERACTION=1
+        export REPORT_EXIT_STATUS=1
         sudo systemctl stop mosquitto
         cd tests
         ./makeTestCerts.sh
