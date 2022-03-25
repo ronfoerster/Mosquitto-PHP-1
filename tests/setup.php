@@ -1,5 +1,4 @@
 <?php
-
 define('CERTIFICATE_DIR', __DIR__ . '/certs/');
 
 if (!class_exists("TypeError")) {
@@ -27,13 +26,6 @@ function errorHandler($errno, $errstr, $errfile, $errline) {
     printf("Caught error %d (%s) in %s on line %d\n", $errno, $errstr, $errfile, $errline);
 }
 set_error_handler('errorHandler');
-
-/*
-set_error_handler( function( $errno, $errstr, $errfile, $errline ) {
-       throw new ErrorException( $errstr, $errno, 0, $errfile, $errline );
-       return false;
-});
-*/
 
 function writeException(Exception $e) {
     printf("Caught %s with code %d and message: %s\n", get_class($e), $e->getCode(), $e->getMessage());
