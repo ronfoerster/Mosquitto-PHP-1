@@ -18,7 +18,7 @@ jobs:
             - 8883:8883
             - 8884:8884
             - 8885:8885
-          options: -v tests:/mosquitto/config -v tests/lib:/usr/lib
+          options: -v ${GITHUB_WORKSPACE}/tests:/mosquitto/config -v ${GITHUB_WORKSPACE}/tests/lib:/usr/lib
     steps:
     - uses: actions/checkout@v2
     - name: Setup PHP
