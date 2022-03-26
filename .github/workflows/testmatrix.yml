@@ -25,8 +25,8 @@ jobs:
         cd mosquitto-${{ matrix.mosquitto-versions }}
         make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=yes -j "$(nproc)"
         sudo make install
-        sudo addgroup -S -g 1883 mosquitto 2>/dev/null
-        sudo adduser -S -u 1883 -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null
+        # sudo addgroup -S -g 1883 mosquitto 2>/dev/null
+        # sudo adduser -S -u 1883 -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null
         cd ..
     - name: Build extension
       run: |
@@ -40,7 +40,7 @@ jobs:
         cd tests
         ./makeTestCerts.sh
         sudo chown -R runner:runner certs
-        mosquitto -c mosquitto.conf -d
+        mosquitto -c mosquitto.conf
         cd ..
         make test
         rm -rf ${GITHUB_WORKSPACE}/mosquitto-${{ matrix.mosquitto-versions }}
