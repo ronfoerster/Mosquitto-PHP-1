@@ -13,10 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Start Mosquitto
-      uses: docker://eclipse-mosquitto:2-openssl
-      with:
-        #entrypoint: usr/local/bin/echo
-        args: -p 1883:1883  -p 8883:8883 -p 8884:8884 -p 8885:8885 -v ${{ github.workspace }}/tests:/mosquitto/config -v ${{ github.workspace }}/tests/lib:/usr/lib
+      run: docker run -d --name mosquitto -p 1883:1883  -p 8883:8883 -p 8884:8884 -p 8885:8885 -v ${{ github.workspace }}/tests:/mosquitto/config eclipse-mosquitto:2-openssl
+    - run: docker cp mosquitto:/usr/lib/libmosquitto.so.1 ${{ github.workspace }}/tests/lib/libmosquitto.so.1
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
@@ -32,3 +30,4 @@ jobs:
         export NO_INTERACTION=1
         export REPORT_EXIT_STATUS=1
         make test
+    - run: docker container stop mosquitto
