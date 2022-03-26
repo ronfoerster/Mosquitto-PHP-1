@@ -23,7 +23,8 @@ jobs:
         wget https://mosquitto.org/files/source/mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
         tar xvzf mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
         cd mosquitto-${{ matrix.mosquitto-versions }}
-        make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=no -j "$(nproc)"
+        rm -r apps/*
+        make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=yes -j "$(nproc)"
         sudo make install
         sudo addgroup -S -g 1883 mosquitto 2>/dev/null
         sudo adduser -S -u 1883 -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null
