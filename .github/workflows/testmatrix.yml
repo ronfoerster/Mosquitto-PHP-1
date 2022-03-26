@@ -40,7 +40,7 @@ jobs:
         cd tests
         ./makeTestCerts.sh
         sudo chown -R runner:runner certs
-        mosquitto -c mosquitto.conf
+        mosquitto -c mosquitto.conf -d
         cd ..
         make test
         rm -rf ${GITHUB_WORKSPACE}/mosquitto-${{ matrix.mosquitto-versions }}
