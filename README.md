@@ -2,7 +2,12 @@
 
 This is an extension to allow using the [Eclipse Mosquitto™ MQTT client library](http://mosquitto.org) with PHP. See the `examples/` directory for usage.
 
-[![Build Status](https://travis-ci.org/mgdm/Mosquitto-PHP.svg?branch=master)](https://travis-ci.org/mgdm/Mosquitto-PHP)
+[![Build and Test](https://github.com/ronfoerster/Mosquitto-PHP-1/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/ronfoerster/Mosquitto-PHP-1/actions/workflows/build-and-test.yml)
+
+## PHP 8 support
+* corrected Test-Files for PHP-8.1
+* Example Dockerfiles
+* kicked travis and add Github Actions
 
 ## PHP 7 support
 

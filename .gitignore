@@ -57,7 +57,7 @@
 /tests/**/*.php
 /tests/**/*.sh
 
-/tests/certs
+/tests/lib/*
 
 .idea/
 CMakeLists.txt

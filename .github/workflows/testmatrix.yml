@@ -18,7 +18,7 @@ jobs:
             - 8883:8883
             - 8884:8884
             - 8885:8885
-          options: -v tests:/mosquitto/config -v /usr/lib/libmosquitto.so.1:/usr/lib/libmosquitto.so.1
+          options: -v tests:/mosquitto/config -v tests/lib:/usr/lib
     steps:
     - uses: actions/checkout@v2
     - name: Setup PHP
@@ -26,15 +26,10 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
         tools: phpize
-    - name: Certificates
-      run: |
-        cd tests
-        ./makeTestCerts.sh
-        sudo chown -R runner:runner certs
     - name: Build extension
       run: |
         phpize
-        ./configure
+        ./configure --with-mosquitto=tests/lib
         make
     - name: Run tests
       run: |
