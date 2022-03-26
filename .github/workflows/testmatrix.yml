@@ -1,0 +1,44 @@
+name: Test-Matrix
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating-system: ['ubuntu-latest']
+        php-versions: ['8.1'] #'7.4', '8.0',
+        mosquitto-versions: ['2.0.14']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        tools: phpize
+    - name: Certificates
+      run: |
+        cd tests
+        ./makeTestCerts.sh
+        sudo chown -R runner:runner certs
+    - name: Mosquitto-Container
+      services:
+        mosquitto:
+          image: eclipse-mosquitto:2-openssl
+          ports:
+            - 1883:1883
+            - 8883:8883
+            - 8884:8884
+            - 8885:8885
+          options: -v tests:/mosquitto/config -v /usr/lib/libmosquitto.so.1:/usr/lib/libmosquitto.so.1
+    - name: Build extension
+      run: |
+        phpize
+        ./configure
+        make
+    - name: Run tests
+      run: |
+        export NO_INTERACTION=1
+        export REPORT_EXIT_STATUS=1
+        make test
