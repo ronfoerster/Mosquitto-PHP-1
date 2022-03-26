@@ -25,14 +25,12 @@ jobs:
         cd mosquitto-${{ matrix.mosquitto-versions }}
         make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=yes -j "$(nproc)"
         sudo make install
-        # sudo addgroup -S -g 1883 mosquitto 2>/dev/null
-        # sudo adduser -S -u 1883 -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null
-        cd ..
+        # cd ..
     - name: Build extension
       run: |
         phpize
         ./configure
-        make
+        make -j "$(nproc)"
     - name: Run tests
       run: |
         export NO_INTERACTION=1
@@ -42,5 +40,6 @@ jobs:
         sudo chown -R runner:runner certs
         mosquitto -c mosquitto.conf -d
         cd ..
-        make test
+        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/publish.phpt
+        # make test TESTS="tests/Client/publish.phpt"
         rm -rf ${GITHUB_WORKSPACE}/mosquitto-${{ matrix.mosquitto-versions }}
