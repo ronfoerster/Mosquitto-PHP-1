@@ -14,7 +14,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Start Mosquitto
       run: docker run -d --name mosquitto -p 1883:1883  -p 8883:8883 -p 8884:8884 -p 8885:8885 -v ${{ github.workspace }}/tests:/mosquitto/config eclipse-mosquitto:2-openssl
-    - run: docker cp mosquitto:/usr/lib/libmosquitto.so.1 ${{ github.workspace }}/tests/lib/libmosquitto.so.1
+    - run: sudo docker cp mosquitto:/usr/lib/libmosquitto.so.1 ${{ github.workspace }}/tests/lib/libmosquitto.so.1
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
