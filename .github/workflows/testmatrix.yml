@@ -10,17 +10,13 @@ jobs:
         operating-system: ['ubuntu-latest']
         php-versions: ['8.1'] #'7.4', '8.0',
         mosquitto-versions: ['2.0.14']
-    services:
-        mosquitto:
-          image: eclipse-mosquitto:2-openssl
-          ports:
-            - 1883:1883
-            - 8883:8883
-            - 8884:8884
-            - 8885:8885
-          options: -v ${GITHUB_WORKSPACE}/tests:/mosquitto/config -v ${GITHUB_WORKSPACE}/tests/lib:/usr/lib
     steps:
     - uses: actions/checkout@v2
+    - name: Start Mosquitto
+      uses: docker://eclipse-mosquitto:2-openssl
+      with:
+        #entrypoint: usr/local/bin/echo
+        args: -p 1883:1883  -p 8883:8883 -p 8884:8884 -p 8885:8885 -v ${{ github.workspace }}/tests:/mosquitto/config -v ${{ github.workspace }}/tests/lib:/usr/lib
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
