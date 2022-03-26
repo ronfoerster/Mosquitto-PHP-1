@@ -11,7 +11,7 @@ jobs:
         php-versions: ['8.1'] #'7.4', '8.0',
         mosquitto-versions: ['2.0.14']
     steps:
-    - run: sudo apt-get install -y libssl-dev
+    - run: sudo apt-get install -y libssl-dev cjson-dev
     - uses: actions/checkout@v2
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -23,7 +23,6 @@ jobs:
         wget https://mosquitto.org/files/source/mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
         tar xvzf mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
         cd mosquitto-${{ matrix.mosquitto-versions }}
-        rm -r apps/*
         make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=yes -j "$(nproc)"
         sudo make install
         sudo addgroup -S -g 1883 mosquitto 2>/dev/null
