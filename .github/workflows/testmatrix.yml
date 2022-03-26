@@ -21,7 +21,7 @@ jobs:
     - name: Make Mosquitto
       run: |
         wget https://mosquitto.org/files/source/mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
-        tar xvzf ${{ matrix.mosquitto-versions }}.tar.gz
+        tar xvzf mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
         cd mosquitto-${{ matrix.mosquitto-versions }}
         make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=no -j "$(nproc)"
         sudo make install
