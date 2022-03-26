@@ -886,10 +886,73 @@ static int strerror_r(int errnum, char *buf, size_t buf_len)
 }
 #endif
 
+void strerror_fixed(int errnum, char *buf, size_t buflen) {
+	// Source: https://ae1020.github.io/fixing-strerror_r-posix-debacle/
+    assert(buflen != 0);
+
+    buf[0] = (char)255;  // never valid in UTF-8 sequences
+    int old_errno = errno;
+    intptr_t r = (intptr_t)strerror_r(errnum, buf, buflen);
+    int new_errno = errno;
+
+    if ((r == -1) || (new_errno != old_errno)) {
+        //
+        // errno was changed, so probably the return value is just -1 or
+        // something else that doesn't provide info.
+        //
+		
+        ap_php_snprintf(buf, buflen, "errno %d in strerror_r call", new_errno);
+    }
+    else if (r == 0) {
+        //
+        // The GNU version always succeds and should never return 0 (NULL).
+        //
+        // "The XSI-compliant strerror_r() function returns 0 on success.
+        // On error, a (positive) error number is returned (since glibc
+        // 2.13), or -1 is returned and errno is set to indicate the error
+        // (glibc versions before 2.13)."
+        //
+        // Documentation isn't clear on whether the buffer is terminated if
+        // the message is too long, or ERANGE always returned.  Terminate.
+        //
+        buf[buflen - 1] = '\0';
+    }
+    else if (r == EINVAL) {  // documented result from XSI strerror_r
+        ap_php_snprintf(buf, buflen, "bad errno %d for strerror_r()", errnum);
+    }
+    else if (r == ERANGE) {  // documented result from XSI strerror_r
+        ap_php_snprintf(buf, buflen, "bad buflen for errno %d", errnum);
+    }
+    else if (r == (intptr_t)buf) {
+        //
+        // The GNU version gives us our error back as a pointer if it
+        // filled the buffer successfully.  Sanity check that.
+        //
+        if (buf[0] == (char)255) {
+            assert(false);
+            strncpy(buf, "strerror_r didn't update buffer", buflen);
+        }
+    }
+    else if (r < 256) {  // extremely unlikely to be string buffer pointer
+        assert(false);
+        strncpy(buf, "Unknown XSI strerror_r error result code", buflen);
+    }
+    else {
+        // The GNU version never fails, but may return an immutable string
+        // instead of filling the buffer. Unknown errors get an
+        // "unknown error" message.  The result is always null terminated.
+        //
+        // (This is the risky part, if `r` is not a valid pointer but some
+        // weird large int return result from XSI strerror_r.)
+        //
+        strncpy(buf, (const char*)r, buflen);
+    }
+}
+
 PHP_MOSQUITTO_API char *php_mosquitto_strerror_wrapper(int err)
 {
 	char *buf = ecalloc(256, sizeof(char));
-	strerror_r(err, buf, 256);
+	strerror_fixed(err, buf, 256);
 	if (!buf[0]) {
 		efree(buf);
 		return NULL;
