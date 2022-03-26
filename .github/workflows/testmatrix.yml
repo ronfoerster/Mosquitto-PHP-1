@@ -11,23 +11,36 @@ jobs:
         php-versions: ['8.1'] #'7.4', '8.0',
         mosquitto-versions: ['2.0.14']
     steps:
+    - run: sudo apt-get install -y libssl-dev
     - uses: actions/checkout@v2
-    - name: Start Mosquitto
-      run: docker run -d --name mosquitto -p 1883:1883  -p 8883:8883 -p 8884:8884 -p 8885:8885 -v ${{ github.workspace }}/tests:/mosquitto/config eclipse-mosquitto:2-openssl
-    - run: sudo docker cp mosquitto:/usr/lib/libmosquitto.so.1 ${{ github.workspace }}/tests/lib/libmosquitto.so.1
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-versions }}
         tools: phpize
+    - name: Make Mosquitto
+      run: |
+        wget https://mosquitto.org/files/source/mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
+        tar xvzf ${{ matrix.mosquitto-versions }}.tar.gz
+        cd mosquitto-${{ matrix.mosquitto-versions }}
+        make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=no -j "$(nproc)"
+        sudo make install
+        sudo addgroup -S -g 1883 mosquitto 2>/dev/null
+        sudo adduser -S -u 1883 -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null
+        cd ..
     - name: Build extension
       run: |
         phpize
-        ./configure --with-mosquitto=tests/lib
+        ./configure
         make
     - name: Run tests
       run: |
         export NO_INTERACTION=1
         export REPORT_EXIT_STATUS=1
+        cd tests
+        ./makeTestCerts.sh
+        sudo chown -R runner:runner certs
+        mosquitto -c mosquitto.conf -d
+        cd ..
         make test
-    - run: docker container stop mosquitto
+        rm -rf ${GITHUB_WORKSPACE}/mosquitto-${{ matrix.mosquitto-versions }}
