@@ -46,8 +46,6 @@ array(3) {
   [2]=>
   string(3) "bar"
 }
-
-Deprecated: Mosquitto\Message::tokeniseTopic(): Passing null to parameter #1 ($topic) of type string is deprecated %s
 array(1) {
   [0]=>
   NULL

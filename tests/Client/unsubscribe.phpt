@@ -58,8 +58,6 @@ $client->loopForever();
 ?>
 --EXPECTF--
 Mosquitto\Client::unsubscribe() expects exactly 1 argument, 0 given
-
-Deprecated: Mosquitto\Client::unsubscribe(): Passing null to parameter #1 ($topic) of type string is deprecated %s
 The client is not currently connected.
 The client is not currently connected.
 Mosquitto\Client::unsubscribe(): Argument #1 ($topic) must be of type string, stdClass given

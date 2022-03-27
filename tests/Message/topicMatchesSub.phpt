@@ -29,10 +29,6 @@ try {
 --EXPECTF--
 bool(true)
 bool(true)
-
-Deprecated: Mosquitto\Message::topicMatchesSub(): Passing null to parameter #1 ($topic) of type string is deprecated %s
-
-Deprecated: Mosquitto\Message::topicMatchesSub(): Passing null to parameter #2 ($subscription) of type string is deprecated %s
 bool(false)
 bool(false)
 bool(false)

@@ -37,18 +37,10 @@ try {
 --EXPECTF--
 object(Mosquitto\Client)#%d (0) {
 }
-
-Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
-
-Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
 object(Mosquitto\Client)#%d (0) {
 }
-
-Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
 object(Mosquitto\Client)#%d (0) {
 }
-
-Deprecated: Mosquitto\Client::setCredentials(): Passing null to parameter #%d (%s) of type string is deprecated %s
 object(Mosquitto\Client)#%d (0) {
 }
 string(98) "Mosquitto\Client::setCredentials(): Argument #1 ($username) must be of type string, stdClass given"
