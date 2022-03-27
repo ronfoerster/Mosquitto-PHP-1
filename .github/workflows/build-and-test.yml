@@ -28,4 +28,5 @@ jobs:
         sudo chown -R runner:runner certs
         mosquitto -c mosquitto.conf -d
         cd ..
+        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/publish.phpt
         make test

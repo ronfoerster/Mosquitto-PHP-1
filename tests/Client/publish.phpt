@@ -58,28 +58,6 @@ try {
 }
 
 try {
-    $client->publish('topic', 'payload', 1);
-    echo "Done\n";
-} catch (Exception $e) {
-    echo $e->getMessage(), "\n";
-}
-
-try {
-    $client->publish('topic', 'payload', 1, true);
-    echo "Done\n";
-} catch (Exception $e) {
-    echo $e->getMessage(), "\n";
-}
-
-try {
-    $client->publish('topic', 'payload', 1, false);
-    echo "Done\n";
-} catch (Exception $e) {
-    echo $e->getMessage(), "\n";
-}
-
-
-try {
     $client->publish('topic', 'payload');
     echo "Done\n";
 } catch (Exception $e) {
@@ -116,9 +94,6 @@ Mosquitto\Client::publish() expects at least 2 arguments, 1 given
 Mosquitto\Client::publish() expects at least 2 arguments, 1 given
 Mosquitto\Client::publish(): Argument #3 ($qos) must be of type int, stdClass given
 Mosquitto\Client::publish(): Argument #4 ($retain) must be of type bool, stdClass given
-The client is not currently connected.
-The client is not currently connected.
-The client is not currently connected.
 The client is not currently connected.
 object(Mosquitto\Message)#%d (5) {
   ["mid"]=>
