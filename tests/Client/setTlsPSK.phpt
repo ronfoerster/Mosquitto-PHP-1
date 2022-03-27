@@ -51,10 +51,9 @@ $client->loopForever();
 --EXPECTF--
 Mosquitto\Client::setTlsPSK() expects at least 2 arguments, 0 given
 Mosquitto\Client::setTlsPSK() expects at least 2 arguments, 1 given
-Invalid function arguments provided.
+Invalid %s provided.
 object(Mosquitto\Client)#%d (0) {
 }
 object(Mosquitto\Client)#%d (0) {
 }
 Connected successfully
-

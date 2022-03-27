@@ -68,10 +68,9 @@ $client2->loopForever();
 ?>
 --EXPECTF--
 Mosquitto\Client::setTlsCertificates() expects at least 1 argument, 0 given
-Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
-Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
-Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
-Caught Mosquitto\Exception with code 0 and message: Invalid function arguments provided.
+Caught Mosquitto\Exception with code 0 and message: Invalid %s provided.
+Caught Mosquitto\Exception with code 0 and message: Invalid %s provided.
+Caught Mosquitto\Exception with code 0 and message: Invalid %s provided.
+Caught Mosquitto\Exception with code 0 and message: Invalid %s provided.
 Connected successfully
 Connected successfully
-
