@@ -8,10 +8,10 @@ jobs:
     steps:
     - run: sudo apt-get install -y mosquitto libmosquitto-dev
     - uses: actions/checkout@v2
-    - name: Setup PHP-8.1
+    - name: Setup PHP-8.0
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.1'
+        php-version: '8.0'
         tools: phpize
     - name: Build extension
       run: |

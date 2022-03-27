@@ -4,33 +4,19 @@ This is an extension to allow using the [Eclipse Mosquitto™ MQTT client librar
 
 [![Build and Test](https://github.com/ronfoerster/Mosquitto-PHP-1/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/ronfoerster/Mosquitto-PHP-1/actions/workflows/build-and-test.yml)
 
-## PHP 8 support
-* corrected Test-Files for PHP-8.1
-* Example Dockerfiles
-* kicked travis and add Github Actions
-
-## PHP 7 support
-
-Thanks to [Sara Golemon](https://twitter.com/SaraMG) this extension now supports PHP 7. I would be grateful if anyone using PHP 7 could test it and let me know how it works out.
+## PHP 8.0 support
+* corrected Test-Files for PHP-8.0
 
 ## Requirements
 
-* PHP 5.3+
+* PHP 8.0
 * libmosquitto 1.2.x or later
-* Linux or Mac OS X. I do not have a Windows machine handy, though patches or
-  pull requests are of course very welcome!
 
 ## Installation
 
 If you've used a pre-built package to install Mosquitto, you need to make sure you have the development headers installed. On Red Hat-derived systems, this is probably called `libmosquitto-devel`, and on Debian-based systems it will be `libmosquitto-dev`.
 
-You may obtain this package using [PECL](http://pecl.php.net):
-
-````
-pecl install Mosquitto-alpha
-````
-
-Alternatively, you can use the normal extension build process:
+Use the normal extension build process:
 
 ````
 phpize

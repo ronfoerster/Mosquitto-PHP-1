@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         operating-system: ['ubuntu-latest']
-        php-versions: ['8.0'] #'7.4', '8.0',
+        php-versions: ['8.0']
         mosquitto-versions: ['mosquitto-2.0.14']
     steps:
     - run: sudo apt-get install -y libssl-dev libcjson-dev
@@ -35,7 +35,7 @@ jobs:
         export NO_INTERACTION=1
         export REPORT_EXIT_STATUS=1
         cd tests
-        # ./makeTestCerts.sh
+        ./makeTestCerts.sh
         sudo chown -R runner:runner certs
         mosquitto -c mosquitto.conf -d
         cd ..
