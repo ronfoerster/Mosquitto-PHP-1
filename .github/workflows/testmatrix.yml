@@ -9,7 +9,7 @@ jobs:
       matrix:
         operating-system: ['ubuntu-latest']
         php-versions: ['8.1'] #'7.4', '8.0',
-        mosquitto-versions: ['2.0.14']
+        mosquitto-versions: ['mosquitto-2.0.14']
     steps:
     - run: sudo apt-get install -y libssl-dev libcjson-dev
     - uses: actions/checkout@v2
@@ -20,26 +20,28 @@ jobs:
         tools: phpize
     - name: Make Mosquitto
       run: |
-        wget https://mosquitto.org/files/source/mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
-        tar xvzf mosquitto-${{ matrix.mosquitto-versions }}.tar.gz
-        cd mosquitto-${{ matrix.mosquitto-versions }}
+        wget https://mosquitto.org/files/source/${{ matrix.mosquitto-versions }}.tar.gz
+        tar xvzf ${{ matrix.mosquitto-versions }}.tar.gz
+        cd ${{ matrix.mosquitto-versions }}
         make WITH_DOCS=no WITH_CJSON=no WITH_SHARED_LIBRARIES=yes -j "$(nproc)"
         sudo make install
         # cd ..
     - name: Build extension
       run: |
         phpize
-        ./configure
+        ./configure --with-mosquitto=${GITHUB_WORKSPACE}/${{ matrix.mosquitto-versions }}
         make -j "$(nproc)"
     - name: Run tests
       run: |
         export NO_INTERACTION=1
         export REPORT_EXIT_STATUS=1
         cd tests
-        ./makeTestCerts.sh
+        # ./makeTestCerts.sh
         sudo chown -R runner:runner certs
         mosquitto -c mosquitto.conf -d
         cd ..
         php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/publish.phpt
+        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setTlsCertificates.phpt
+        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setTlsPSK.phpt
         # make test TESTS="tests/Client/publish.phpt"
-        rm -rf ${GITHUB_WORKSPACE}/mosquitto-${{ matrix.mosquitto-versions }}
+        rm -rf ${GITHUB_WORKSPACE}/${{ matrix.mosquitto-versions }}

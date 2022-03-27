@@ -11,70 +11,70 @@ $client = new Mosquitto\Client();
 try {
     $client->publish();
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (ArgumentCountError $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish(new stdClass);
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (ArgumentCountError $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish(new stdClass, new stdClass);
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (TypeError $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('#');
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (ArgumentCountError $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic');
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (ArgumentCountError $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', new stdClass);
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (TypeError $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1, new stdClass);
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (TypeError $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1);
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (Exception $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1, true);
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (Exception $e) {
     echo $e->getMessage(), "\n";
 }
 
 try {
     $client->publish('topic', 'payload', 1, false);
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (Exception $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -82,7 +82,7 @@ try {
 try {
     $client->publish('topic', 'payload');
     echo "Done\n";
-} catch (Throwable $e) {
+} catch (Exception $e) {
     echo $e->getMessage(), "\n";
 }
 
@@ -116,9 +116,9 @@ Mosquitto\Client::publish() expects at least 2 arguments, 1 given
 Mosquitto\Client::publish() expects at least 2 arguments, 1 given
 Mosquitto\Client::publish(): Argument #3 ($qos) must be of type int, stdClass given
 Mosquitto\Client::publish(): Argument #4 ($retain) must be of type bool, stdClass given
-Done
-Done
-Done
+The client is not currently connected.
+The client is not currently connected.
+The client is not currently connected.
 The client is not currently connected.
 object(Mosquitto\Message)#%d (5) {
   ["mid"]=>
