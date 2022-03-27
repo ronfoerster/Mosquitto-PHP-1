@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         operating-system: ['ubuntu-latest']
-        php-versions: ['8.1'] #'7.4', '8.0',
+        php-versions: ['8.1']
         mosquitto-versions: ['mosquitto-2.0.14']
     steps:
     - run: sudo apt-get install -y libssl-dev libcjson-dev
@@ -41,9 +41,5 @@ jobs:
         sudo chown -R runner:runner certs
         mosquitto -c mosquitto.conf -d
         cd ..
-        #php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setCredentials.phpt
-        #php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/unsubscribe.phpt
-        #php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Message/tokeniseTopic.phpt
-        #php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Message/topicMatchesSub.phpt
-        make test # TESTS="tests/Client/publish.phpt"
+        make test 
         rm -rf ${GITHUB_WORKSPACE}/${{ matrix.mosquitto-versions }}
