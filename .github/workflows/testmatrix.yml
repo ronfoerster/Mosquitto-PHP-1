@@ -39,9 +39,7 @@ jobs:
         sudo chown -R runner:runner certs
         mosquitto -c mosquitto.conf -d
         cd ..
-        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/setCredentials.phpt
-        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/unsubscribe.phpt
-        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/tokeniseTopic.phpt
-        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Client/topicMatchesSub.phpt
-        #make test # TESTS="tests/Client/publish.phpt"
+        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Message/tokeniseTopic.phpt
+        php -n -d "extension_dir=./modules/" -d "extension=mosquitto.so" ./tests/Message/topicMatchesSub.phpt
+        make test # TESTS="tests/Client/publish.phpt"
         rm -rf ${GITHUB_WORKSPACE}/${{ matrix.mosquitto-versions }}
