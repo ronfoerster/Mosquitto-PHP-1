@@ -1,7 +1,7 @@
 --TEST--
 Mosquitto\Client::publish()
 --SKIPIF--
-if (!extension_loaded('mosquitto')) die('skip - Mosquitto extension not available');
+<?php if (!extension_loaded('mosquitto')) die('skip Mosquitto extension not available'); ?>
 --FILE--
 <?php
 include(dirname(__DIR__) . '/setup.php');
@@ -115,7 +115,7 @@ Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() 
 Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects at least 2 parameters, 1 given
 Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects at least 2 parameters, 1 given
 Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects parameter 3 to be %s, object given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects parameter 4 to be boolean, object given
+Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::publish() expects parameter 4 to be %s, object given
 Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
 Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.
 Caught Mosquitto\Exception with code 0 and message: The client is not currently connected.

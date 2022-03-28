@@ -1,7 +1,7 @@
 --TEST--
 Mosquitto\Client::setWill()
 --SKIPIF--
-if (!extension_loaded('mosquitto')) die('skip - Mosquitto extension not available');
+<?php if (!extension_loaded('mosquitto')) die('skip Mosquitto extension not available'); ?>
 --FILE--
 <?php
 include(dirname(__DIR__) . '/setup.php');
@@ -95,6 +95,6 @@ Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() 
 Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 2 given
 Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 3 given
 Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects exactly 4 parameters, 3 given
-Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects parameter 4 to be boolean, object given
+Caught Mosquitto\Exception with code 0 and message: Mosquitto\Client::setWill() expects parameter 4 to be bool, object given
 Done
 Done

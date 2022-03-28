@@ -1,7 +1,7 @@
 --TEST--
 Mosquitto\Client::setTlsInsecure()
 --SKIPIF--
-if (!extension_loaded('mosquitto')) die('skip - Mosquitto extension not available');
+<?php if (!extension_loaded('mosquitto')) die('skip Mosquitto extension not available'); ?>
 --FILE--
 <?php
 include(dirname(__DIR__) . '/setup.php');
@@ -26,4 +26,4 @@ object(Mosquitto\Client)#%d (0) {
 }
 object(Mosquitto\Client)#%d (0) {
 }
-string(82) "Mosquitto\Client::setTlsInsecure() expects parameter 1 to be boolean, object given"
+string(79) "Mosquitto\Client::setTlsInsecure() expects parameter 1 to be bool, object given"

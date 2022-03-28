@@ -1,7 +1,7 @@
 --TEST--
 Mosquitto\Client::connect()
 --SKIPIF--
-if (!extension_loaded('mosquitto')) die('skip - Mosquitto extension not available');
+<?php if (!extension_loaded('mosquitto')) die('skip Mosquitto extension not available'); ?>
 --FILE--
 <?php
 include(dirname(__DIR__) . '/setup.php');
@@ -105,7 +105,6 @@ try {
 Mosquitto\Client::connect() expects at least 1 parameter, 0 given
 %s error.
 %s error.
-Invalid function arguments provided.
 Mosquitto\Client::connect() expects parameter 2 to be %s, object given
 Mosquitto\Client::connect() expects parameter 3 to be %s, object given
 %s error.

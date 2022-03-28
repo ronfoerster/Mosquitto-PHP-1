@@ -1,7 +1,7 @@
 --TEST--
 Mosquitto\Client::loopForever()
 --SKIPIF--
-if (!extension_loaded('mosquitto')) die('skip - Mosquitto extension not available');
+<?php if (!extension_loaded('mosquitto')) die('skip Mosquitto extension not available'); ?>
 --FILE--
 <?php
 include(dirname(__DIR__) . '/setup.php');
