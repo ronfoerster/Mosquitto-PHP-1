@@ -12,27 +12,30 @@ This is an extension to allow using the [Eclipse Mosquitto™ MQTT client librar
 ## Requirements
 
 * PHP 8.x
-* libmosquitto 1.2.x or later
-* Linux or Mac OS X. I do not have a Windows machine handy, though patches or
-  pull requests are of course very welcome!
+* libmosquitto
 
 ## Installation
 
 If you've used a pre-built package to install Mosquitto, you need to make sure you have the development headers installed. On Red Hat-derived systems, this is probably called `libmosquitto-devel`, and on Debian-based systems it will be `libmosquitto-dev`.
-
-Alternatively, you can use the normal extension build process:
-
+Example Ubuntu:
+````
+sudo apt update && apt install libmosquitto-dev
+````
+Please download the source packages from our releases or use git:
+````
+git clone https://github.com/ronfoerster/Mosquitto-PHP-1.git && \
+cd Mosquitto-PHP-1
+````
+Configure, compile and install at the source folder:
 ````
 phpize
-./configure --with-mosquitto=/path/to/libmosquitto
+./configure 
 make
 make install
 ````
+Then add `extension=mosquitto.so` to your `php.ini`. The path of the used ini-Files can you get with the command `php --ini`.
 
-Then add `extension=mosquitto.so` to your `php.ini`.
-
-The `--with-mosquitto` argument is optional, and only required if your
-libmosquitto install cannot be found.
+The `./configure --with-mosquitto=/path/to/mosquitto` argument is optional, and only required if your libmosquitto install cannot be found. 
 
 ## General operation
 
