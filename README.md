@@ -17,11 +17,16 @@ This is an extension to allow using the [Eclipse Mosquitto™ MQTT client librar
 ## Installation
 
 If you've used a pre-built package to install Mosquitto, you need to make sure you have the development headers installed. On Red Hat-derived systems, this is probably called `libmosquitto-devel`, and on Debian-based systems it will be `libmosquitto-dev`.
+
 Example Ubuntu:
 ````
 sudo apt update && apt install libmosquitto-dev
 ````
-Please download the source packages from our releases or use git:
+Please download the source packages from our releases:
+````
+wget -qO- https://github.com/ronfoerster/Mosquitto-PHP-1/archive/refs/tags/v0.5.0-alpha.tar.gz | tar -xvz && cd Mosquitto-PHP-1-0.5.0-alpha
+````
+or use git:
 ````
 git clone https://github.com/ronfoerster/Mosquitto-PHP-1.git && \
 cd Mosquitto-PHP-1
@@ -69,3 +74,6 @@ echo "Finished"
 
 Full documentation is [available on ReadTheDocs](http://mosquitto-php.readthedocs.io/).
 
+## Alternative
+https://github.com/php-mqtt/client
+https://github.com/simps/mqtt
